@@ -32,4 +32,8 @@ def test_now_false(client):
     rv = post_now(client, False)
     now = datetime.now()
     assert bytes(now.strftime("%Y-%m-%d"),'utf-8')  == rv.data
+def test_now_invalid(client):
+    rv = post_now(client, 2)
+    now = datetime.now()
+    assert bytes('format not recognized.','utf-8')  == rv.data
 

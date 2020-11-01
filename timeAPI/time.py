@@ -11,13 +11,12 @@ bp = Blueprint('time', __name__, url_prefix='/time')
 @bp.route('/now', methods=['POST'])
 def now():
         timeFormat = request.form['timeFormat']
-        error = None
         now = datetime.now()
         if timeFormat == None:
-            error = 'format is required.'
-        if timeFormat == 'True':
+            return 'format is required.'
+        elif timeFormat == 'True':
             return now.strftime("%Y-%m-%d %H:%M:%S")
-        if timeFormat == 'False':
+        elif timeFormat == 'False':
             return now.strftime("%Y-%m-%d")
-
-        return timeFormat
+        else:
+            return 'format not recognized.'
